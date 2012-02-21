@@ -27,5 +27,15 @@ enter hipster in random text and see error rate go up
 
 ctrl-c server to stop it from running
 
+# Run the replay command to see first error
+
 python replay.py
+
+fix the code in handlers.handle_message
+
+# Run replay again seeing no errors :)
+
+python replay.py
+
+WOOT done
 

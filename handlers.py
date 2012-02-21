@@ -17,6 +17,7 @@ def handle_message(event):
     this situation just by doing something other than raising an Exception.
     """
     if event['data']['text'].find('hipster') > -1:
+        #print('Hipster really I mean we could do better no?')
         raise Exception('NO NO NO not a hipster') # Simulates exception in application
 reg('message', handle_message)
 
