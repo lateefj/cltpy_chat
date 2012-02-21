@@ -12,6 +12,9 @@ pip install beaker
 
 pip install flask
 
+# Build all the database in /tmp (sorry windows didn't test)
+ 
+python bootstrap.py
 
 # Start the web server
 
