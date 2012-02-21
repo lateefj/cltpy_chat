@@ -2,8 +2,12 @@
 
 Installation:
 
+# Install virtual env if you havn't already
+
 # pip install virtualenvwrapper
+
 # source /usr/local/bin/virtualenvwrapper.sh
+
 mkvirtualenv cltpy_chat
 
 pip install sqlalchemy
