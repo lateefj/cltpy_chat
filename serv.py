@@ -121,7 +121,7 @@ def start_server():
             'session.secret':'oooh_big_secret'
             }
     app.wsgi_app = SessionMiddleware(app.wsgi_app, session_opts)
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
 if __name__ == "__main__":
     start_server()

@@ -2,7 +2,7 @@
 
 Installation:
 
-# pip install virtualenvwrapper
+pip install virtualenvwrapper
 
 mkvirtualenv cltpy_chat
 
@@ -20,25 +20,25 @@ python bootstrap.py
 
 python serv.py 
 
-got to http://localhost:5000/
+open http://localhost:5000/
 
-enter name and click login
+# enter name and click login
 
-enter random text into send a couple times
+# enter random text into send a couple times
 
-enter hipster in random text and see error rate go up
+# enter hipster in random text and see error rate go up
 
-ctrl-c server to stop it from running
+# ctrl-c server to stop it from running
 
 # Run the replay command to see first error
 
 python replay.py
 
-fix the code in handlers.handle_message
+# fix the code in handlers.handle_message
 
 # Run replay again seeing no errors :)
 
 python replay.py
 
-WOOT done
+# WOOT done
 
