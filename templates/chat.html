@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://jquery-json.googlecode.com/files/jquery.json-2.3.min.js"></script>
+    <script src="http://people.iola.dk/olau/flot/jquery.flot.js"></script>
+    <script>
+      try {
+        function addMessage(message) {
+          $('#messages').prepend('<div>' + e.message + '</div>');
+        }
+        function send(event, callback) {
+          event.timestamp = new Date().getTime();
+          $.post('/s', {'event':$.toJSON(event)}, function (data) {
+            if(callback) {
+              callback(data);
+            }
+          });
+        }
+        var eventCounts = new Array();
+        var errorCounts = new Array();
+        var prevErrorCount = null;
+        var prevEventCount = null;
+
+        function getCount() {
+          send({type:'error_count', data:{}}, function(data) {
+              displayCount(data);
+            });
+          }
+          function displayCount(data) {
+            if(prevErrorCount == null || prevEventCount == null || prevErrorCount != data.error_count || prevEventCount != data.event_count) {
+              prevErrorCount = data.error_count;
+              prevEventCount = data.event_count;
+              errorCounts.push([errorCounts.length, data.error_count]);
+              eventCounts.push([eventCounts.length, data.event_count]);
+              $.plot($("#placeholder"), [{label: 'Errors', data:errorCounts}, {label:'Events',data:eventCounts}]);
+              var percent =  parseInt((prevErrorCount / prevEventCount) * 100);
+              $('#percentError').html(percent);
+            }
+            setTimeout('getCount()', 5000);
+          }
+
+          $(document).ready(function() {
+
+            setTimeout('getCount()', 2000);
+            $('#sendMessageSubmit').click(function (e) {
+              var m = $('#sendMessage').val();
+              send({'type': 'message', 'data': {'text':m}});
+            });
+          });
+          } catch (err) {
+          var e = {text:err.message};
+          $.post('/err', {'event':$.toJSON(e)});
+        }
+      </script>
+
+    </head>
+    <body>
+      <center><h3>Plot of Random Numbers</h3><center>
+          <div id="placeholder" style="width:600px;height:300px"></div>
+          <div>Error %<em id="percentError"></em></div>
+          <br />
+          <div id="sendMessageSection"><input id="sendMessage" type="text" name="send_message"><input id="sendMessageSubmit" type="submit" value="send"></div>
+          <div id="messages"></div>
+        </body>
+      </html>
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        if ( typeof(WebSocket) != "function" ) {
+          $('body').html("<h2><center>ERROR: This browser does not support Web Sockets</center></h2>");
+        }
+
+        $('#loginSubmit').click(function (e) {
+          var un = $('#userName').val();
+          $.get('/l/' + un, {}, function(data) {
+            window.location = '/chat';
+          });
+
+
+        });
+      });
+    </script>
+
+  </head>
+  <body>
+    <center><h3>Eventers</h3><center>
+        <div id="loginSection"><input id="userName" type="text" name="user_name"><input id="loginSubmit" type="submit" value="login"></div>
+      </body>
+    </html>
+
+
